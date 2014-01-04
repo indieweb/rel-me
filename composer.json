@@ -1,6 +1,7 @@
 {
 	"name": "indieweb/rel-me",
 	"description": "Functions for discovering, consuming and verifying rel-me microformat",
+	"license": "MIT",
 	"require": {
 		"mf2/mf2": "~0.2"
 	},
