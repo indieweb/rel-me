@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "d8b2f88a7eee64e68fe67f5699308b73",
+    "hash": "1e4feea9c99558fb7fc722b0b691f733",
     "packages": [
         {
             "name": "mf2/mf2",
@@ -522,9 +522,9 @@
     "stability-flags": [
 
     ],
-    "platform": [
-
-    ],
+    "platform": {
+        "php": ">=5.3"
+    },
     "platform-dev": [
 
     ]
