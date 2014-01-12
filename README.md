@@ -30,7 +30,7 @@ if ($isSecure) {
 ### Find all `rel=me` links on a page
 
 ```php
-// this should be derived and checked using relMeDocumentUrl()
+// This should be derived and checked using relMeDocumentUrl().
 $resolvedProfileUrl = 'http://waterpigs.co.uk';
 
 $relMeLinks = IndieWeb\relMeLinks($resolvedProfileUrl);
@@ -39,12 +39,12 @@ $relMeLinks = IndieWeb\relMeLinks($resolvedProfileUrl);
 ### Test whether or not a backlinking `rel=me` URL can be securely considered to link
 
 ```php
-// a rel=me link from a silo profile page
+// A rel=me link from a silo profile page.
 $inboundRelMeUrl = 'http://t.co/qhZqdUcTbQ';
-// the derived profile document URL to test for matches of
+// The derived profile document URL to test for matches of.
 $meUrl = 'http://waterpigs.co.uk';
 
-list($matches, $secure, $previous) = IndieWeb\backlinkingRelMeUrlMatches($inboundRelMeUrl, $meUrl);
+list($matches, $secure, $redirectChain) = IndieWeb\backlinkingRelMeUrlMatches($inboundRelMeUrl, $meUrl);
 
 if ($matches) {
 	if ($secure) {
