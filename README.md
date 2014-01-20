@@ -1,6 +1,6 @@
 # rel-me
 
-A set of PHP functions for discovering, consuming and verifying the rel-me microformat.
+A set of PHP functions for discovering, consuming and verifying the [rel-me](http://microformats.org/wiki/rel-me) microformat. This is mainly useful for implementing [relmeauth](http://indiewebcamp.com/relmeauth).
 
 ## Usage
 
