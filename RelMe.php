@@ -33,7 +33,7 @@ if (!function_exists('http_parse_headers') or defined('TESTING')) {
 				
 				$key = $headerName;
 			} else {
-				// dealing with a contined line, $key is the last seen key
+				// dealing with a continued line, $key is the last seen key
 				if (substr($h[0], 0, 1) == "\t")
 					$headers[$key] .= "\r\n\t" . trim($h[0]);
 				elseif (!$key) // I have no idea what this is supposed to be doing
