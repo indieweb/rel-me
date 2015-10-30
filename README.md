@@ -2,6 +2,8 @@
 
 A set of PHP functions for discovering, consuming and verifying the [rel-me](http://microformats.org/wiki/rel-me) microformat. This is mainly useful for implementing [relmeauth](http://indiewebcamp.com/relmeauth).
 
+[![Build Status](https://travis-ci.org/indieweb/rel-me.svg?branch=master)](http://travis-ci.org/indieweb/rel-me)
+
 ## Usage
 
 Install using [composer](https://getcomposer.org) with `./composer.phar require indieweb/rel-me:dev-master`
