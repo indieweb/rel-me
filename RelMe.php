@@ -126,6 +126,7 @@ function relMeDocumentUrl($url, $followOneRedirect = null) {
 	
 	$previous = array();
 	$secure = true;
+    $is_https = false;
 	$currentUrl = $url;
 	while (true) {
 		// TODO: is resolving this URL correct behaviour here?
@@ -135,11 +136,14 @@ function relMeDocumentUrl($url, $followOneRedirect = null) {
 			break;
 		elseif (in_array($redirectedUrl, $previous)):
 			break;
-		elseif (parse_url($currentUrl, PHP_URL_SCHEME) !== parse_url($redirectedUrl, PHP_URL_SCHEME)):
+		elseif ($is_https && parse_url($currentUrl, PHP_URL_SCHEME) !== parse_url($redirectedUrl, PHP_URL_SCHEME)):
 			$secure = false;
 			$previous[] = $currentUrl = $redirectedUrl;
 			break;
 		else:
+            if (parse_url($currentUrl, PHP_URL_SCHEME) == 'https') {
+                $is_https = true;
+            }
 			$currentUrl = $redirectedUrl;
 			$previous[] = $currentUrl;
 		endif;
