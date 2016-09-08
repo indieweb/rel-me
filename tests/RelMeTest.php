@@ -14,12 +14,12 @@ class RelMeTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals('http://example.com/', unparseUrl(parse_url('http://example.com')));
 		$this->assertEquals('http://example.com/?thing&amp;more', unparseUrl(parse_url('http://example.com?thing&amp;more')));
 	}
-	
+
 	public function testNormaliseUrl() {
 		$this->assertEquals('http://example.com/', normaliseUrl('http://example.com'));
 		$this->assertEquals('http://example.com/?thing=1', normaliseUrl('http://example.com?thing=1'));
 	}
-	
+
 	public function testHttpParseHeaders() {
 		$test = <<<EOT
 content-type: text/html; charset=UTF-8
@@ -38,12 +38,12 @@ EOT;
 		$result = http_parse_headers($test);
 		$this->assertEquals($expected, $result);
 	}
-	
+
 	/** @group network */
 	public function testFollowOneRedirect() {
 		$this->assertEquals('https://brennannovak.com/', followOneRedirect('http://brennannovak.com'));
 	}
-	
+
 	public function testRelMeDocumentUrlHandlesNoRedirect() {
 		$chain = mockFollowOneRedirect(array(null));
 		$meUrl = normaliseUrl('http://example.com');
@@ -51,17 +51,17 @@ EOT;
 		$this->assertEquals($meUrl, $url);
 		$this->assertTrue($isSecure);
 	}
-	
+
 	public function testRelMeDocumentUrlHandlesSingleSecureHttpRedirect() {
 		$finalUrl = normaliseUrl('http://example.org');
 		$chain = mockFollowOneRedirect(array($finalUrl));
 		$meUrl = normaliseUrl('http://example.com');
 		list($url, $isSecure, $previous) = relMeDocumentUrl($meUrl, $chain);
 		$this->assertEquals($finalUrl, $url);
-		$this->assertTrue($isSecure);		
+		$this->assertTrue($isSecure);
 		$this->assertContains($finalUrl, $previous);
 	}
-	
+
 	public function testRelMeDocumentUrlHandlesMultipleSecureHttpRedirects() {
 		$finalUrl = normaliseUrl('http://example.org');
 		$intermediateUrl = normaliseUrl('http://www.example.org');
@@ -72,17 +72,17 @@ EOT;
 		$this->assertTrue($isSecure);
 		$this->assertContains($intermediateUrl, $previous);
 	}
-	
+
 	public function testRelMeDocumentUrlHandlesSingleSecureHttpsRedirect() {
 		$finalUrl = normaliseUrl('https://example.org');
 		$chain = mockFollowOneRedirect(array($finalUrl));
 		$meUrl = normaliseUrl('https://example.com');
 		list($url, $isSecure, $previous) = relMeDocumentUrl($meUrl, $chain);
 		$this->assertEquals($finalUrl, $url);
-		$this->assertTrue($isSecure);		
+		$this->assertTrue($isSecure);
 		$this->assertContains($finalUrl, $previous);
 	}
-	
+
 	public function testRelMeDocumentUrlHandlesMultipleSecureHttpsRedirects() {
 		$finalUrl = normaliseUrl('https://example.org');
 		$intermediateUrl = normaliseUrl('https://www.example.org');
@@ -93,17 +93,17 @@ EOT;
 		$this->assertTrue($isSecure);
 		$this->assertContains($intermediateUrl, $previous);
 	}
-	
+
 	public function testRelMeDocumentUrlHandlesSingleSecureHttpToHttpsRedirect() {
 		$finalUrl = normaliseUrl('https://example.org');
 		$chain = mockFollowOneRedirect(array($finalUrl));
 		$meUrl = normaliseUrl('http://example.com');
 		list($url, $isSecure, $previous) = relMeDocumentUrl($meUrl, $chain);
 		$this->assertEquals($finalUrl, $url);
-		$this->assertTrue($isSecure);		
+		$this->assertTrue($isSecure);
 		$this->assertContains($finalUrl, $previous);
 	}
-	
+
 	public function testRelMeDocumentUrlReportsInsecureRedirect() {
 		$finalUrl = normaliseUrl('http://example.org');
 		$intermediateUrl = normaliseUrl('https://www.example.org');
@@ -113,7 +113,7 @@ EOT;
 		$this->assertFalse($isSecure);
 		$this->assertContains($intermediateUrl, $previous);
 	}
-	
+
 	public function testRelMeLinksFindsLinks() {
 		$relMeLinks = relMeLinks(<<<EOT
 <link rel="me" href="http://example.org" />
@@ -122,9 +122,9 @@ EOT
 			, 'http://example.com');
 		$this->assertEquals(array('http://example.org', 'http://twitter.com/barnabywalters'), $relMeLinks);
 	}
-	
+
 	// backlinkingRelMeSuccessNoRedirect tests
-	
+
 	public function testBacklinkingRelMeSuccessNoRedirect() {
 		$meUrl = $backlinkingMeUrl = 'http://example.com';
 		$chain = mockFollowOneRedirect(array($backlinkingMeUrl));
@@ -132,7 +132,7 @@ EOT
 		$this->assertTrue($matches);
 		$this->assertTrue($secure);
 	}
-	
+
 	public function testBacklinkingRelMeSuccessOneRedirect() {
 		$meUrl = 'http://example.com';
 		$backlinkingMeUrl = 'http://example.org';
@@ -141,7 +141,7 @@ EOT
 		$this->assertTrue($matches);
 		$this->assertTrue($secure);
 	}
-	
+
 	public function testBacklinkingRelMeNoMatchInsecureRedirect() {
 		$meUrl = 'http://example.com';
 		$backlinkingMeUrl = 'http://example.org';
@@ -150,7 +150,7 @@ EOT
 		$this->assertFalse($matches);
 		$this->assertFalse($secure);
 	}
-	
+
 	public function testBacklinkingRelMeSuccessInsecureRedirect() {
 		$meUrl = 'http://example.org';
 		$backlinkingMeUrl = 'http://example.com';
@@ -159,7 +159,7 @@ EOT
 		$this->assertTrue($matches);
 		$this->assertFalse($secure);
 	}
-	
+
 	public function testBacklinkingRelMeSecureRedirectNoMatch() {
 		$meUrl = 'http://example.org';
 		$backlinkingMeUrl = 'http://example.com';
@@ -168,4 +168,19 @@ EOT
 		$this->assertFalse($matches);
 		$this->assertTrue($secure);
 	}
+
+	/**
+	 * Tests that a backlinking rel matches without the domain being case-sensitive
+	 * @see https://github.com/indieweb/indiewebify-me/issues/52
+	 */
+	public function testBacklinkingRelMeNotCaseSensitive() {
+		$meUrl = 'http://www.lifewithalacrity.com/';
+		$backlinkingMeUrl = 'http://t.co/agsxcOcLry';
+		$stylizedUrl = 'Http://www.LifeWithAlacrity.com/';
+		$chain = mockFollowOneRedirect(array($stylizedUrl));
+		list($matches, $secure, $previous) = backlinkingRelMeUrlMatches($backlinkingMeUrl, $meUrl, $chain);
+		$this->assertTrue($matches);
+		$this->assertTrue($secure);
+	}
+
 }
