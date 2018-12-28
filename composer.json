@@ -4,7 +4,7 @@
 	"license": "MIT",
 	"require": {
 		"php": ">=5.3",
-		"mf2/mf2": "0.2.*"
+		"mf2/mf2": "^0.4"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "*",
