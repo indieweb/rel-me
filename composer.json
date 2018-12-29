@@ -3,7 +3,7 @@
 	"description": "Functions for discovering, consuming and verifying rel-me microformat",
 	"license": "MIT",
 	"require": {
-		"php": ">=5.3",
+		"php": ">=5.6",
 		"mf2/mf2": "^0.4"
 	},
 	"require-dev": {
