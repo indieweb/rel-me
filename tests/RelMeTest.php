@@ -41,7 +41,7 @@ EOT;
 
 	/** @group network */
 	public function testFollowOneRedirect() {
-		$this->assertEquals('https://brennannovak.com/', followOneRedirect('http://brennannovak.com'));
+		$this->assertEquals('https://aaronparecki.com/', followOneRedirect('http://aaronparecki.com/'));
 	}
 
 	public function testRelMeDocumentUrlHandlesNoRedirect() {
