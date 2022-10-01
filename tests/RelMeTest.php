@@ -2,14 +2,14 @@
 
 namespace IndieWeb;
 
-use PHPUnit_Framework_TestCase;
+use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
 /**
  * RelMeTest
  *
  * @author barnabywalters
  */
-class RelMeTest extends PHPUnit_Framework_TestCase {
+class RelMeTest extends TestCase {
 	public function testUnparseUrl() {
 		$this->assertEquals('http://example.com/', unparseUrl(parse_url('http://example.com')));
 		$this->assertEquals('http://example.com/?thing&amp;more', unparseUrl(parse_url('http://example.com?thing&amp;more')));
