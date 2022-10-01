@@ -1,12 +1,12 @@
 # rel-me
 
-A set of PHP functions for discovering, consuming and verifying the [rel-me](http://microformats.org/wiki/rel-me) microformat. This is mainly useful for implementing [relmeauth](http://indiewebcamp.com/relmeauth).
+A set of PHP functions for discovering, consuming and verifying the [rel-me](https://microformats.org/wiki/rel-me) microformat. This is mainly useful for implementing [RelMeAuth](https://indieweb.org/relmeauth).
 
-[![Build Status](https://travis-ci.org/indieweb/rel-me.svg?branch=master)](http://travis-ci.org/indieweb/rel-me)
+![Build Status](https://github.com/indieweb/rel-me/actions/workflows/main.yml/badge.svg)
 
 ## Usage
 
-Install using [composer](https://getcomposer.org) with `./composer.phar require indieweb/rel-me:dev-master`
+Install using [Composer](https://getcomposer.org) with `./composer.phar require indieweb/rel-me:dev-master`
 
 ### Resolve and test a profile URL
 
@@ -75,6 +75,10 @@ Run the test suite with `./vendor/bin/phpunit`
 There’s also an experimental HTML+microformats test suite which can be run with  `./tests/html-test-runner.php`
 
 ## Version History
+
+### 0.1.1 2022-10-03
+* Update dependencies, including php-mf2 v0.5.0
+* Update CI to Github Actions
 
 ### 0.1.0 2014-01-04
 * Initial extraction from indiewebify.me, conversion into a composer package
