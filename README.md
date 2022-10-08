@@ -76,7 +76,7 @@ There’s also an experimental HTML+microformats test suite which can be run wit
 
 ## Version History
 
-### 0.1.1 2022-10-03
+### 0.1.1 2022-10-08
 * Update dependencies, including php-mf2 v0.5.0
 * Update CI to Github Actions
 
